@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Have a Good Day ADii!</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 30px 0;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            color: #ff4081;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff4081;
+            transform: rotate(45deg);
+            opacity: 0;
+        }
+        
+        .heart:before, .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff4081;
+            border-radius: 50%;
+        }
+        
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: -10px;
+        }
+        
+        /* Main Content */
+        .birthday-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .birthday-card:hover {
+            transform: scale(1.02) rotateY(5deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        h2 {
+            color: #673ab7;
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border: 10px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Interactive Elements */
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background: #ff5722;
+            margin: 30px auto;
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .gift-box:hover {
+            transform: scale(1.1) rotateY(20deg);
+        }
+        
+        .gift-box:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: #e91e63;
+            top: -10px;
+            left: 0;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .gift-box:after {
+            content: '🎁';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+        }
+        
+        .gift-message {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: fadeIn 1s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Countdown */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e91e63;
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+        }
+        
+        .signature {
+            font-size: 1.5rem;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Happy Preemptive Birthday! ☕🎉</h1>
+            <p>To the TT guy.......</p>
+        </header>
+        
+        <div class="birthday-card">
+            <div class="photo-frame">
+                <!-- Replace with your boyfriend's photo -->
+                <img src="C:\Users\hp\Pictures\Screenshots\Screenshot (5).png" alt="Our Photo">
+            </div>
+            
+            <h2>May your discipline outshine every distraction.</h2>
+            <p>Random reminder ! You're awesome & No matter what, I’ve got your back😉</p>
+            
+            <div class="gift-box" id="giftBox"></div>
+            <div class="gift-message" id="giftMessage">
+                <h3>"We’re like electrostatic charges—opposite but bound by an invisible force stronger than attraction. Even when life tries to pull us apart, our energy always finds its way back to equilibrium. Stay charged, stay brilliant." </h3>
+                <p>⚡ Science Breakdown:</br>
+
+Opposite charges attract → Our differences create energy</br>
+
+Static cling → Even when apart, we "snap back" together</br>
+
+Dielectric strength → Our bond withstands outside interference</p>
+            </div>
+        </div>
+        
+        <div class="birthday-card">
+            <h2>Countdown to Your Special Day</h2>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">0</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">0</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">0</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">0</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            
+            <!--<h2>10 Reasons Why You're Amazing</h2>
+            <ol style="text-align: left; margin-left: 40px;">
+                <li>Your smile brightens my darkest days</li>
+                <li>You always know how to make me laugh</li>
+                <li>Your kindness touches everyone around you</li>
+                <li>You support me in everything I do</li>
+                <li>Your hugs are my favorite place in the world</li>
+                <li>You're incredibly talented at [his hobby]</li>
+                <li>You remember all the little things that matter</li>
+                <li>You challenge me to be a better person</li>
+                <li>You're my perfect match in every way</li>
+                <li>You love me for who I am</li>
+            </ol>-->
+        </div>
+        
+        <footer>
+            <p>With all my love, for your special day and every day</p>
+            <p class="signature">Srushti ❤️</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const colors = ['#ff4081', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.opacity = Math.random();
+                heart.style.width = (Math.random() * 15 + 10) + 'px';
+                heart.style.height = heart.style.width;
+                heart.style.animation = `float ${Math.random() * 5 + 5}s linear infinite`;
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Gift box interaction
+        document.getElementById('giftBox').addEventListener('click', function() {
+            const message = document.getElementById('giftMessage');
+            if (message.style.display === 'block') {
+                message.style.display = 'none';
+            } else {
+                message.style.display = 'block';
+            }
+        });
+        
+        // Countdown to birthday
+        function updateCountdown() {
+            // Set the birthday date (YYYY, MM-1, DD)
+            // Remember months are 0-indexed in JavaScript (0=January, 11=December)
+            const birthday = new Date(2004, 06, 01); // Example: December 25, 2023
+            
+            const now = new Date();
+            let nextBirthday = new Date(birthday);
+            nextBirthday.setFullYear(now.getFullYear());
+            
+            // If birthday has already passed this year, set for next year
+            if (nextBirthday < now) {
+                nextBirthday.setFullYear(now.getFullYear() + 1);
+            }
+            
+            const diff = nextBirthday - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+        
+        // Initialize
+        window.onload = function() {
+            createHearts();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        };
+    </script>
+</body>
+</html>
